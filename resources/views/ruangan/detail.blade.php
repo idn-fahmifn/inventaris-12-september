@@ -76,6 +76,13 @@
             </div>
 
             <div>
+                <x-input-label for="kode_ruangan" :value="__('Kode Ruangan')" />
+                <x-text-input id="kode_ruangan" name="kode_ruangan" type="text" class="mt-1 block w-full"
+                    :value="old('kode_ruangan', $data->kode_ruangan)" required autofocus autocomplete="kode_ruangan" />
+                <x-input-error class="mt-2" :messages="$errors->get('nama_ruangan')" />
+            </div>
+
+            <div>
                 <x-input-label for="id_user" :value="__('Penanggung Jawab Ruangan')" />
                 <select name="id_user" required
                     class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
@@ -99,13 +106,6 @@
                     <option value="besar">Besar</option>
                 </select>
                 <x-input-error class="mt-2" :messages="$errors->get('ukuran')" />
-            </div>
-
-            <div>
-                <x-input-label for="name" :value="__('Deskripsi Ruangan')" />
-                <textarea name="deskripsi"
-                    class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">{{ $data->deskripsi }}</textarea>
-                <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
 
             <div class="mt-6 flex justify-end">
