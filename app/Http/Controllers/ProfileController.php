@@ -11,6 +11,28 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+
+    // function untuk dashboard admin
+
+    public function dashboardAdmin()
+    {
+        return view('dashboard');
+    }
+
+    public function dashboardPetugas()
+    {
+        return view('dashboard-petugas');
+    }
+
+    public function indexPetugas()
+    {
+        return view('petugas.index');
+    }
+
+    //function untuk dashboard petugas
+
+
     /**
      * Display the user's profile form.
      */

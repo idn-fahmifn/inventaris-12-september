@@ -9,23 +9,24 @@ Route::get('/', function () {
 
 
 // Group Admin
-Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->group(function () {
 
     // dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    
+    Route::get('/dashboard', [ProfileController::class, 'dashboardAdmin'])
+    ->name('dashboard');
+
+    // index dari data petugas
+    Route::get('/petugas', [ProfileController::class, 'indexPetugas'])->name('petugas.index');
+
 });
 
 // Group Petugas
 Route::prefix('petugas')->middleware(['auth', 'verified'])->group(function () {
 
     // dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard.petugas');
-    
+    Route::get('/dashboard', [ProfileController::class, 'dashboardPetugas'])
+    ->name('dashboard.petugas');
+
 });
 
 
