@@ -8,4 +8,6 @@ class Barang extends Model
 {
     protected $table = 'barang';
     protected $guarded;
+
+    protected $casts = ['tanggal_pembelian' =>'datetime'];
 }

@@ -80,11 +80,7 @@
                         <x-input-label for="merk" value="Merk" />
                         <x-text-input id="merk" name="merk" type="text" class="mt-1 block w-full" />
                     </div>
-                    <div>
-                        <x-input-label for="tanggal_pembelian" value="Tanggal Pembelian" />
-                        <x-text-input id="tanggal_pembelian" name="tanggal_pembelian" type="date"
-                            class="mt-1 block w-full" />
-                    </div>
+                    
                     <div>
                         <x-input-label for="gambar" value="Gambar" />
                         <x-text-input id="gambar" name="gambar" type="file"

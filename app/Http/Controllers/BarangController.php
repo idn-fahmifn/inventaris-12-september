@@ -29,7 +29,7 @@ class BarangController extends Controller
             'gambar' => ['file', 'max:10240', 'mimes:jpg,jpeg,png,svg,webv,heic'],
             'deskripsi' => ['required'],
             'kondisi' => ['required'],
-            'tanggal_pembelian' => ['required', 'date'],
+
         ]);
 
         $room_code = Ruangan::where('kode_ruangan', $request->input('kode_ruangan_input'))->first();
@@ -39,8 +39,8 @@ class BarangController extends Controller
             'merk' => $request->input('merk'),
             'kondisi' => $request->input('kondisi'),
             'deskripsi' => $request->input('deskripsi'),
-            'tanggal_pembelian' => $request->input('tanggal_pembelian'),
-            'id_kategori' => $room_code,
+
+            'id_ruangan' => $room_code->id,
         ];
 
         // kondisi ketika ada file yang diinputkan
@@ -55,6 +55,8 @@ class BarangController extends Controller
             $simpan['gambar'] = $nama; //data yang akan dikirimkan ke database diambil dari variable nama
             $image->storeAs($path, $nama); //menyimpan ke folder storage
         }
+
+        // return $simpan;
 
         Barang::create($simpan);
         return redirect()->route('barang.index')
