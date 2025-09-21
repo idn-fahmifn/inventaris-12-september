@@ -70,6 +70,10 @@
                         <x-input-label for="ukuran" value="Ukuran Ruangan" />
                         <select name="ukuran" id="ukuran" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             <option value="">-Pilih Ukuran Ruangan-</option>
+                            <option value="small">Small</option>
+                            <option value="medium">Medium</option>
+                            <option value="large">Large</option>
+                            <option value="extra large">Extra large</option>
                         </select>
                     </div>
                     <div>

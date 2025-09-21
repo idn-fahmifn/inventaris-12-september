@@ -10,9 +10,10 @@ class RuanganController extends Controller
 {
     public function index()
     {
-        $data = Ruangan::all();
+        $data = Ruangan::all(); //menampilkan semua data ruangan
         $user = User::where('isAdmin', false)->get();
-        return view('ruangan.index', compact('data', 'user'));
+        return view('ruangan.index', 
+        compact('data', 'user'));
     }
 
     public function store(Request $request)
