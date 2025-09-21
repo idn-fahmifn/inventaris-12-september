@@ -28,13 +28,19 @@ class RuanganController extends Controller
         $simpan = [
             'nama_ruangan' => $request->input('nama_ruangan'),
             'kode_ruangan' => $request->input('kode_ruangan'),
-            'ukuran' => $request->input('ukuran'),
             'id_user' => $request->input('id_user'),
         ];
 
         Ruangan::create($simpan);
         return back()->with('success', 'Ruangan berhasil dibuat');
+    }
 
+    public function detail($id)
+    {
+        $data = Ruangan::findOrFail($id);
+        $user = User::where('isAdmin', false)->get();
+        return view('ruangan.detail', 
+        compact('data', 'user'));
     }
 
 }

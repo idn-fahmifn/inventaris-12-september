@@ -5,8 +5,8 @@
                 Data Master Ruangan
             </h2>
             {{-- Tombol 'Tambah' --}}
-            <button onclick="document.getElementById('createRuanganModal').showModal()" 
-                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-150 shadow-md">
+            <button onclick="document.getElementById('createRuanganModal').showModal()"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-150 shadow-md">
                 + Tambah Ruangan
             </button>
         </div>
@@ -15,25 +15,56 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                
+
                 <div class="overflow-x-auto">
                     {{-- Tabel untuk menampilkan data ruangan (kosong) --}}
+
+                    @foreach ($errors->all() as $item)
+                        {{ $item }}
+                    @endforeach
+
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-700">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Kode Ruangan</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nama Ruangan</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Deskripsi</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Aksi</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Kode Ruangan</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Nama Ruangan</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Penanggung Jawab</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                            <tr>
-                                <td colspan="4" class="px-6 py-4 text-center text-sm italic text-gray-500 dark:text-gray-400">
-                                    Belum ada data ruangan.
-                                </td>
-                            </tr>
-                            {{-- Loop data ruangan akan masuk di sini --}}
+                            @forelse($data as $item)
+
+                                <tr>
+                                    <td class="px-6 py-4 text-sm font-bold text-gray-500 dark:text-gray-400">
+                                        {{ $item->kode_ruangan }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-bold text-gray-500 dark:text-gray-400">
+                                        {{ $item->nama_ruangan }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-bold text-gray-500 dark:text-gray-400">
+                                        {{ $item->pic->name }}
+                                    </td>
+                                    <td>
+                                        <a href=""
+                                            class="px-6 py-4 text-sm font-bold text-blue-500 dark:text-gray-400">detail</a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4"
+                                        class="px-6 py-4 text-center text-sm italic text-gray-500 dark:text-gray-400">
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -41,25 +72,29 @@
             </div>
         </div>
     </div>
-    
+
     {{-- Modal Create Data Ruangan --}}
     <dialog id="createRuanganModal" class="p-0 backdrop:bg-black/50 rounded-lg shadow-2xl dark:bg-gray-900">
         <div class="p-6 w-[400px]">
-             <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b pb-2 dark:border-gray-700">Input Ruangan Baru</h3>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b pb-2 dark:border-gray-700">
+                Input Ruangan Baru</h3>
             <form method="POST" action="{{ route('ruangan.store') }}">
                 @csrf
                 <div class="space-y-4">
                     <div>
                         <x-input-label for="kode_ruangan" value="Kode Ruangan" />
-                        <x-text-input id="kode_ruangan" name="kode_ruangan" type="text" class="mt-1 block w-full" placeholder="Contoh: R-01" required />
+                        <x-text-input id="kode_ruangan" name="kode_ruangan" type="text" class="mt-1 block w-full"
+                            placeholder="Contoh: R-01" required />
                     </div>
                     <div>
                         <x-input-label for="nama_ruangan" value="Nama Ruangan" />
-                        <x-text-input id="nama_ruangan" name="nama_ruangan" type="text" class="mt-1 block w-full" required />
+                        <x-text-input id="nama_ruangan" name="nama_ruangan" type="text" class="mt-1 block w-full"
+                            required />
                     </div>
                     <div>
                         <x-input-label for="id_user" value="Nama Penanggung Jawab Ruangan" />
-                        <select name="id_user" id="id_user" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        <select name="id_user" id="id_user"
+                            class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             <option value="">-Pilih PIC Ruangan-</option>
                             @foreach ($user as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -68,7 +103,8 @@
                     </div>
                     <div>
                         <x-input-label for="ukuran" value="Ukuran Ruangan" />
-                        <select name="ukuran" id="ukuran" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        <select name="ukuran" id="ukuran"
+                            class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             <option value="">-Pilih Ukuran Ruangan-</option>
                             <option value="small">Small</option>
                             <option value="medium">Medium</option>
@@ -78,9 +114,10 @@
                     </div>
 
                 </div>
-                
+
                 <div class="mt-6 flex justify-end gap-3">
-                    <button type="button" onclick="document.getElementById('createRuanganModal').close()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <button type="button" onclick="document.getElementById('createRuanganModal').close()"
+                        class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                         Batal
                     </button>
                     <x-primary-button class="ml-3">
