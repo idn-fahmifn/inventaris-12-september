@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->string('gambar');
             $table->date('tanggal_pembelian');
             $table->text('deskripsi');
+            $table->enum('kondisi', ['baik', 'rusak', 'sedang diperbaiki'])->default('baik');
             $table->timestamps();
         });
     }

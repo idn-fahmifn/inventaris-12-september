@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuanganController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,12 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->group(functio
     Route::get('/ruangan/{param}', [RuanganController::class, 'detail'])->name('ruangan.detail');
     Route::put('/ruangan/{param}', [RuanganController::class, 'update'])->name('ruangan.update');
     Route::delete('/ruangan/{param}', [RuanganController::class, 'destroy'])->name('ruangan.destroy');
+
+    Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
+    Route::post('/barang', [BarangController::class, 'store'])->name('barang.store');
+    Route::get('/barang/{param}', [BarangController::class, 'detail'])->name('barang.detail');
+    Route::put('/barang/{param}', [BarangController::class, 'update'])->name('barang.update');
+    Route::delete('/barang/{param}', [BarangController::class, 'destroy'])->name('barang.destroy');
 
 
 });
