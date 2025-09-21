@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Ruangan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BarangController extends Controller
 {
@@ -21,20 +23,24 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_produk' => ['string', 'required', 'min:3', 'max:20'],
-            'harga' => ['numeric', 'required', 'min:1000', 'max:100000000'],
-            'stok' => ['numeric', 'required', 'min:0', 'max:999'],
+            'nama_barang' => ['string', 'required', 'min:3', 'max:20'],
+            'merk' => ['string', 'required', 'min:3', 'max:20'],
+            'kode_ruangan_input' => ['required', 'string', Rule::exists('ruangan', 'kode_ruangan')],
             'gambar' => ['file', 'max:10240', 'mimes:jpg,jpeg,png,svg,webv,heic'],
             'deskripsi' => ['required'],
-            'id_kategori' => ['required', 'numeric'],
+            'kondisi' => ['required'],
+            'tanggal_pembelian' => ['required', 'date'],
         ]);
 
+        $room_code = Ruangan::where('kode_ruangan', $request->input('kode_ruangan_input'))->first();
+
         $simpan = [
-            'nama_produk' => $request->input('nama_produk'),
-            'harga' => $request->input('harga'),
-            'stok' => $request->input('stok'),
+            'nama_barang' => $request->input('nama_barang'),
+            'merk' => $request->input('merk'),
+            'kondisi' => $request->input('kondisi'),
             'deskripsi' => $request->input('deskripsi'),
-            'id_kategori' => $request->input('id_kategori'),
+            'tanggal_pembelian' => $request->input('tanggal_pembelian'),
+            'id_kategori' => $room_code,
         ];
 
         // kondisi ketika ada file yang diinputkan
@@ -50,9 +56,9 @@ class BarangController extends Controller
             $image->storeAs($path, $nama); //menyimpan ke folder storage
         }
 
-        Produk::create($simpan);
-        return redirect()->route('produk.index')
-            ->with('success', "Produk berhasil ditambahkan");
+        Barang::create($simpan);
+        return redirect()->route('barang.index')
+            ->with('success', "Barang berhasil ditambahkan");
     }
 
     public function detail($id)

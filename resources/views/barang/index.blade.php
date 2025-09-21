@@ -62,7 +62,7 @@
         <div class="p-6 w-[400px]">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b pb-2 dark:border-gray-700">
                 Input Barang Baru</h3>
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('barang.store') }}" enctype="multipart/form-data" >
                 @csrf
                 <div class="space-y-4">
                     <div>
@@ -86,6 +86,11 @@
                             class="mt-1 block w-full" />
                     </div>
                     <div>
+                        <x-input-label for="gambar" value="Gambar" />
+                        <x-text-input id="gambar" name="gambar" type="file"
+                            class="mt-1 block w-full p-4" />
+                    </div>
+                    <div>
                         <x-input-label for="kondisi" value="Kondisi Barang" />
                         <select id="kondisi" name="kondisi"
                             class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
@@ -96,7 +101,7 @@
                         </select>
                     </div>
                      <div>
-                        <x-input-label for="tanggal_pembelian" value="Deskripsi" />
+                        <x-input-label for="deskripsi" value="Deskripsi" />
                         <textarea name="deskripsi" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" id=""></textarea>
                     </div>
                 </div>
