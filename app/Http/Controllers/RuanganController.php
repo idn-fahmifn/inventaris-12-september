@@ -55,7 +55,7 @@ class RuanganController extends Controller
             'ukuran' => ['required', 'string'],
             'id_user' => ['required', 'numeric'],
         ]);
-
+        
         $simpan = [
             'nama_ruangan' => $request->input('nama_ruangan'),
             'kode_ruangan' => $request->input('kode_ruangan'),
