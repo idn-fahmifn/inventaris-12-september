@@ -16,7 +16,10 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->group(functio
     ->name('dashboard');
 
     // index dari data petugas
-    Route::get('/petugas', [ProfileController::class, 'indexPetugas'])->name('petugas.index');
+    Route::get('/petugas', [ProfileController::class, 'indexPetugas'])
+    ->name('petugas.index');
+    Route::post('/petugas', [ProfileController::class, 'storePetugas'])
+    ->name('petugas.store');
 
 });
 

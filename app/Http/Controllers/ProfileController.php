@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,17 +21,34 @@ class ProfileController extends Controller
         return view('dashboard');
     }
 
-    public function dashboardPetugas()
-    {
-        return view('dashboard-petugas');
-    }
-
     public function indexPetugas()
     {
         return view('petugas.index');
     }
 
+    public function storePetugas(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+        ]);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => '12345678',
+        ]);
+        return back()->with('success', 'Data petugas berhasil ditambah');
+    }
+
     //function untuk dashboard petugas
+
+    public function dashboardPetugas()
+    {
+        return view('dashboard-petugas');
+    }
+
+    
+
 
 
     /**
