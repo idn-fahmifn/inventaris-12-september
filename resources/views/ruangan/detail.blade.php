@@ -39,7 +39,7 @@
                                 </p>
                                
 
-                                <form action="" method="post" class="py-6">
+                                <form action="{{ route('ruangan.destroy', $data->id) }}" method="post" class="py-6">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" onclick="return confirm('Yakin mau dihapus?')"
@@ -101,9 +101,10 @@
                     class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
                     id="">
                     <option value="{{ $data->ukuran }}">{{ $data->ukuran }}</option>
-                    <option value="kecil">Kecil</option>
-                    <option value="sedang">Sedang</option>
-                    <option value="besar">Besar</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                    <option value="extra large">Extra Large</option>
                 </select>
                 <x-input-error class="mt-2" :messages="$errors->get('ukuran')" />
             </div>

@@ -65,7 +65,15 @@ class RuanganController extends Controller
 
         $data->update($simpan);
         return back()->with('success', 'Data berhasil diperbarui');
-
     }
+
+    public function destroy($id)
+    {
+        $data = Ruangan::find($id);
+        $data->delete();
+        return redirect()->route('ruangan.index')
+        ->with('success', 'Ruangan berhasil dihapus');
+    }
+
 
 }
