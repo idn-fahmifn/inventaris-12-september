@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RuanganController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +21,11 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->group(functio
     ->name('petugas.index');
     Route::post('/petugas', [ProfileController::class, 'storePetugas'])
     ->name('petugas.store');
+
+
+    // route Ruangan
+    Route::get('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
+
 
 });
 

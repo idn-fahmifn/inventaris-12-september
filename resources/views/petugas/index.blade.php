@@ -43,7 +43,6 @@
                                     <a href="" class="px-6 py-4 text-sm font-bold text-blue-500 dark:text-gray-400">detail</a>
                                 </td>
                             </tr>
-
                             @empty
                                 <tr>
                                     <td colspan="4"
@@ -51,8 +50,6 @@
                                     </td>
                                 </tr>
                             @endforelse
-
-
                         </tbody>
                     </table>
                 </div>
