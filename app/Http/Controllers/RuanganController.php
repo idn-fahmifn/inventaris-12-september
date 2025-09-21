@@ -23,6 +23,17 @@ class RuanganController extends Controller
             'ukuran' => ['required', 'string'],
             'id_user' => ['required', 'numeric'],
         ]);
+
+        $simpan = [
+            'nama_ruangan' => $request->input('nama_ruangan'),
+            'kode_ruangan' => $request->input('kode_ruangan'),
+            'ukuran' => $request->input('ukuran'),
+            'id_user' => $request->input('id_user'),
+        ];
+
+        Ruangan::create($simpan);
+        return back()->with('success', 'Ruangan berhasil dibuat');
+
     }
 
 }
