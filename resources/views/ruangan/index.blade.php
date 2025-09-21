@@ -46,7 +46,7 @@
     <dialog id="createRuanganModal" class="p-0 backdrop:bg-black/50 rounded-lg shadow-2xl dark:bg-gray-900">
         <div class="p-6 w-[400px]">
              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b pb-2 dark:border-gray-700">Input Ruangan Baru</h3>
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('ruangan.store') }}">
                 @csrf
                 <div class="space-y-4">
                     <div>
@@ -76,10 +76,7 @@
                             <option value="extra large">Extra large</option>
                         </select>
                     </div>
-                    <div>
-                        <x-input-label for="deskripsi" value="Deskripsi" />
-                        <textarea id="deskripsi" name="deskripsi" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"></textarea>
-                    </div>
+
                 </div>
                 
                 <div class="mt-6 flex justify-end gap-3">
